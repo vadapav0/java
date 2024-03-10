@@ -1,0 +1,42 @@
+//. Create a class player as follows:-
+// Data members:- pname(String),innings(int),runs(int),notouts(int)
+//Methods:-
+//i) void showdata() – to display the details of player. ii) Void calcAvg() – to
+//calculate batting average of player as follows:- Bat. Avg= runs/(innings-notouts)
+import java.util.Scanner;
+
+class Player {
+    String playerName;
+    int innings;
+    int runs;
+    int notOuts;
+
+    public Player(String playerName, int innings, int runs, int notOuts) {
+        this.playerName = playerName;
+        this.innings = innings;
+        this.runs = runs;
+        this.notOuts = notOuts;
+    }
+
+    public void showData() {
+        System.out.println("Player name: " + playerName);
+        System.out.println("Innings: " + innings);
+        System.out.println("Runs scored: " + runs);
+        System.out.println("Not outs: " + notOuts);
+    }
+
+    public void calculateAverage() {
+        if (innings - notOuts != 0) {
+            int battingAverage = runs / (innings - notOuts);
+            System.out.println("Batting average of player is: " + battingAverage);
+        } else {
+            System.out.println("Cannot calculate batting average: Division by zero error");
+        }
+    }
+
+    public static void main(String args[]) {
+        Player p = new Player("Tauseef", 10, 100, 4);
+        p.showData();
+        p.calculateAverage();
+    }
+}
