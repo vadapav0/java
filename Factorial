@@ -1,0 +1,63 @@
+//Design an AWT application to calculate the factorial of a number
+import java.awt.*;
+import java.awt.event.*;
+
+public class Factorial extends Frame implements ActionListener {
+    private TextField textfield;
+    private Button b;
+    private Label l, r;
+
+    public Factorial() {
+        l = new Label("Enter number");
+        r = new Label();
+
+        textfield = new TextField();
+
+        b = new Button("Factorial");
+
+        l.setBounds(30, 70, 150, 20);
+        r.setBounds(30, 170, 200, 20);
+        textfield.setBounds(30, 90, 190, 30);
+        b.setBounds(30, 130, 190, 30);
+        b.setBackground(Color.BLUE);
+        b.setForeground(Color.WHITE);
+
+        add(l);
+        add(r);
+        add(textfield);
+        add(b);
+
+        setSize(300, 300);
+        setLayout(null);
+        setVisible(true);
+
+        b.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b) {
+            try {
+                int num = Integer.parseInt(textfield.getText());
+                r.setText("Factorial of " + num + " is " + getFactorial(num));
+            } catch (NumberFormatException ex) {
+                r.setText("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+    public int getFactorial(int x) {
+        int factorial = 1;
+        for (int i = 1; i <= x; i++) {
+            factorial *= i;
+        }
+        return factorial;
+    }
+
+    public static void main(String args[]) {
+        new Factorial();
+    }
+}
