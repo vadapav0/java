@@ -1,0 +1,36 @@
+//Write a Java program to create an interface Area with one method AreaCompute()with
+//2 float parameters. Design 2 classes Rectangle and Circle implementing the
+// Area Interface.
+interface Area {
+    void compute(float x, float y);
+}
+
+class Rectangle implements Area {
+    Rectangle() {
+        System.out.println("Rectangle constructor called");
+    }
+
+    public void compute(float x, float y) {
+        System.out.println(x * y);
+    }
+}
+
+class Circle implements Area {
+    Circle() {
+        System.out.println("Circle constructor called");
+    }
+
+    public void compute(float x, float y) {
+        System.out.println(3.14 * x * x);
+    }
+}
+
+ class Main {
+    public static void main(String[] args) {
+        Rectangle r = new Rectangle();
+        r.compute(2, 4);
+
+        Circle c = new Circle();
+        c.compute(2, 0);
+    }
+}
