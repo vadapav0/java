@@ -1,0 +1,49 @@
+// Write a Java code to implement MouseListener and MouseMotionListener.
+import java.awt.*;
+import java.awt.event.*;
+
+ class Mouse extends Frame implements MouseListener {
+     Label label;
+
+    public Mouse() {
+        label = new Label();
+        label.setBounds(30, 70, 300, 20); // Increased width to display longer messages
+
+        add(label);
+        setSize(400, 300); // Increased width of the frame
+        setLayout(null);
+        setVisible(true);
+
+        addMouseListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void mousePressed(MouseEvent e) {
+        label.setText("Mouse pressed event generated");
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        label.setText("Mouse clicked event generated");
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        label.setText("Mouse released event generated");
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        label.setText("Mouse entered event generated");
+    }
+
+    public void mouseExited(MouseEvent e) {
+        label.setText("Mouse exited event generated");
+    }
+
+    public static void main(String args[]) {
+        new Mouse();
+    }
+}
