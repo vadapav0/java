@@ -1,0 +1,61 @@
+// Design an AWT application to check whether the number entered in textbox is
+//even or not
+import java.awt.*;
+import java.awt.event.*;
+
+public class Even extends Frame implements ActionListener {
+    TextField tf;
+    Button b;
+    Label  l, r;
+
+    public Even() {
+
+        l = new Label("Enter number");
+        r = new Label();
+        tf = new TextField();
+        b = new Button("Result");
+
+        l.setBounds(30, 70, 150, 20);
+        r.setBounds(30, 170, 200, 20);
+        tf.setBounds(30, 90, 190, 30);
+        b.setBounds(30, 130, 190, 30);
+        b.setBackground(Color.BLUE);
+        b.setForeground(Color.WHITE);
+
+        add(l);
+        add(r);
+        add(tf);
+        add(b);
+
+        setSize(250, 210);
+        setLayout(null);
+        setVisible(true);
+
+        b.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b) {
+            try {
+                int x = Integer.parseInt(tf.getText());
+                if (x % 2 == 0) {
+                    r.setText("The number " + x + " is even");
+                } else {
+                    r.setText("The number " + x + " is odd");
+                }
+            } catch (NumberFormatException ex) {
+                r.setText("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Even();
+    }
+}
