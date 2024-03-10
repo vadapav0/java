@@ -1,0 +1,32 @@
+//Write a Java program to input Basic salary of a person and calculate Net salary inRs.
+//after increasing his salary as per the following criteria and Display the Net Salary.
+// Basic(Rs.) %increase
+// < 3000 2
+// >=3000 <5000 5
+// >=5000 <10000 10
+//Above 10000 20
+
+import java.util.Scanner;
+
+public class Salary {
+    public static void main(String args[]) {
+        double basicSal, netSal, increasedSal;
+        double increment = 0;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter basic salary:");
+        basicSal = scanner.nextDouble();
+        if (basicSal < 3000) {
+            increment = 2;
+        } else if (basicSal >= 3000 && basicSal < 5000) {
+            increment = 5;
+        } else if (basicSal >= 5000 && basicSal < 10000) {
+            increment = 10;
+        } else if (basicSal >= 10000) {
+            increment = 20;
+        }
+        increasedSal = basicSal * (increment / 100);
+        netSal = basicSal + increasedSal;
+        System.out.println("The net salary of the person after " + increment + "% increment in " + basicSal + " is " + netSal);
+        scanner.close();
+    }
+}
