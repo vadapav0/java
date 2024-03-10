@@ -1,0 +1,61 @@
+//Write a Java AWT program to accept a number from user (TextBox) and display
+//the cube of the number
+import java.awt.*;
+import java.awt.event.*;
+
+public class Cube extends Frame implements ActionListener {
+
+    TextField tf;
+    Button b;
+    Label r;
+
+    public Cube() {
+        Label l = new Label("Enter number");
+        r = new Label();
+
+        tf = new TextField();
+        b = new Button("Result");
+
+        setLayout(null);
+
+        l.setBounds(30, 70, 150, 20);
+        r.setBounds(30, 170, 200, 20);
+        tf.setBounds(30, 90, 190, 30);
+        b.setBounds(30, 130, 190, 30);
+
+        b.setBackground(Color.BLUE);
+        b.setForeground(Color.WHITE);
+
+
+        add(l);
+        add(r);
+        add(tf);
+        add(b);
+
+        setSize(250, 210);
+        setVisible(true);
+
+        b.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b) {
+            try {
+                int num = Integer.parseInt(tf.getText());
+                r.setText("Cube of " + num + " is " + (num * num * num));
+            } catch (NumberFormatException ex) {
+                r.setText("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+        new Cube();
+    }
+}
