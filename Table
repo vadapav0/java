@@ -1,0 +1,53 @@
+//Write a java awt code to accept a number and show its table
+import java.awt.*;
+import java.awt.event.*;
+
+public class MultiplicationTable extends Frame implements ActionListener {
+    TextField textField;
+    Button button;
+    TextArea resultArea;
+    Label label;
+    MultiplicationTable() {
+        label = new Label("Enter a number:");
+        textField = new TextField();
+        button = new Button("Generate Table");
+        resultArea = new TextArea();
+
+        label.setBounds(30, 40, 120, 20);
+        textField.setBounds(160, 40, 80, 20);
+        button.setBounds(30, 80, 120, 30);
+        resultArea.setBounds(30, 120, 200, 150);
+
+        add(label);
+        add(textField);
+        add(button);
+        add(resultArea);
+
+        button.addActionListener(this);
+
+        setSize(300, 300);
+        setLayout(null);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int number = Integer.parseInt(textField.getText());
+            StringBuilder table = new StringBuilder();
+            for (int i = 1; i <= 10; i++) {
+                table.append(number + " * " + i + " = " + (number * i) + "\n");
+            }
+            resultArea.setText(table.toString());
+        } catch (NumberFormatException ex) {
+            resultArea.setText("Invalid input. Please enter a valid number.");
+        }
+    }
+    public static void main(String args[]) {
+        new MultiplicationTable();
+    }
+}
