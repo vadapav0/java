@@ -1,0 +1,60 @@
+// Design a class to represent a bank account. Include the following members:
+// Data Members:
+// 1)Name of the depositor 2)Account number 3) Type of account(Savings/Current)
+// 4)Balance amount in the account(Minimum balance is Rs.500.00)
+// Methods:
+// 5)To read account number, Depositor name, Type of account
+// 6)To deposit an amount ( Deposited amount should de added with it)
+// 7)To withdraw an amount after checking balance(Minimum balance must be
+//Rs.500.00)
+// 8)To display the balance
+import java.util.Scanner;
+
+public class BankAc {
+    String depositorName;
+    int accountNumber;
+    String accountType;
+    private double availableBalance = 500;
+
+    public void inputAccountInfo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter name of depositor: ");
+        depositorName = scanner.nextLine();
+        System.out.print("Enter account number: ");
+        accountNumber = scanner.nextInt();
+        System.out.print("Enter account type (Saving/Current): ");
+        accountType = scanner.next();
+        System.out.println("Depositor Name: " + depositorName + "  " + "Account No: " + accountNumber + "  " + "Account type: " + accountType);
+    }
+
+    public void deposit() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter amount to deposit: ");
+        double depositAmount = scanner.nextDouble();
+        availableBalance += depositAmount;
+        System.out.println("Available balance after depositing amount is: " + availableBalance);
+    }
+
+    public void withdraw() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter amount to withdraw: ");
+        double withdrawAmount = scanner.nextDouble();
+        if (availableBalance - withdrawAmount >= 500) {
+            availableBalance -= withdrawAmount;
+            System.out.println("Withdraw successful");
+        } else {
+            System.out.println("Insufficient balance in account");
+        }
+    }
+    public void displayBalance() {
+        System.out.println("Account balance: " + availableBalance);
+    }
+
+    public static void main(String args[]) {
+        BankAc account = new BankAc();
+        account.inputAccountInfo();
+        account.deposit();
+        account.withdraw();
+        account.displayBalance();
+    }
+}
