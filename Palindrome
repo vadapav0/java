@@ -1,0 +1,73 @@
+//. Write a Java AWT program to check a number is palindrome or not
+import java.awt.*;
+import java.awt.event.*;
+class PalindromeChecker extends Frame implements ActionListener {
+    TextField tf;
+    Button b;
+    Label resultLabel;
+
+    public PalindromeChecker() {
+        Label numberLabel = new Label("Enter a number:");
+        resultLabel = new Label();
+
+        tf = new TextField();
+        b = new Button("Check Palindrome");
+
+        numberLabel.setBounds(30, 70, 150, 20);
+        resultLabel.setBounds(30, 120, 200, 20);
+        tf.setBounds(30, 90, 190, 30);
+        b.setBounds(30, 150, 190, 30);
+
+        b.setBackground(Color.BLUE);
+        b.setForeground(Color.WHITE);
+
+        add(numberLabel);
+        add(tf);
+        add(b);
+        add(resultLabel);
+
+        setSize(300, 220);
+        setLayout(null);
+        setVisible(true);
+
+        b.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b) {
+            try {
+                int num = Integer.parseInt(tf.getText());
+                if (isPalindrome(num)) {
+                    resultLabel.setText(num + " is a palindrome number.");
+                } else {
+                    resultLabel.setText(num + " is not a palindrome number.");
+                }
+            } catch (NumberFormatException ex) {
+                resultLabel.setText("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    private boolean isPalindrome(int num) {
+        int reversed = 0;
+        int originalNum = num;
+        while (num != 0) {
+            int digit = num % 10;
+            reversed = reversed * 10 + digit;
+            num /= 10;
+        }
+        return originalNum == reversed;
+    }
+
+    public static void main(String args[]) {
+        new PalindromeChecker();
+    }
+}
+
