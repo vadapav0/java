@@ -1,0 +1,47 @@
+//Write a Java program to implement KeyListener
+import java.awt.*;
+import java.awt.event.*;
+
+public class key extends Frame implements KeyListener {
+    private Label label;
+    private TextField textField;
+
+    public key() {
+        label = new Label();
+        label.setBounds(30, 70, 250, 20);
+
+        textField = new TextField();
+        textField.setBounds(70, 100, 150, 30);
+        textField.addKeyListener(this);
+
+        add(textField);
+        add(label);
+
+        setSize(300, 300);
+        setLayout(null);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void keyPressed(KeyEvent e) {
+        label.setText("Key pressed event generated");
+    }
+
+    public void keyTyped(KeyEvent e) {
+        label.setText("Key typed event generated");
+    }
+
+    public void keyReleased(KeyEvent e) {
+        label.setText("Key released event generated");
+    }
+
+    public static void main(String args[]) {
+        new key();
+    }
+}
+
