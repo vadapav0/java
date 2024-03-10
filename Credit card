@@ -1,0 +1,44 @@
+//Write a Java program to accept the credit card type and shopping amount from theuser
+//and then display the Net Price as Net Price= Shopping Amount – Discount.The
+//discount is calculated based on credit card and total shopping amount as follows::
+//Credit Card Type Shopping Amount Discount (%)
+//VISA <5000 10
+// >=5000 20
+//XYZ <10000 15
+// >=10000 25
+//ABC <8000 12
+// >=8000 15
+import java.util.Scanner;
+
+public class CreditCard {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter credit card type (VISA, XYZ, ABC): ");
+        String cardType = scanner.next();
+
+        System.out.println("Enter Shopping Amount: ");
+        double shopAmt = scanner.nextDouble();
+
+        double discount;
+        switch (cardType) {
+            case "VISA":
+                discount = (shopAmt < 5000) ? 10 : 20;
+                break;
+            case "XYZ":
+                discount = (shopAmt < 10000) ? 15 : 25;
+                break;
+            case "ABC":
+                discount = (shopAmt < 800) ? 12 : 15;
+                break;
+            default:
+                System.out.println("Invalid card type");
+                return;
+        }
+
+        double discountAmt = shopAmt * (discount / 100);
+        double netPrice = shopAmt - discountAmt;
+
+        System.out.println("The net price is: " + netPrice);
+    }
+}
