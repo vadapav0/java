@@ -1,0 +1,60 @@
+package PAC;
+
+import prime.radha;
+import factorial.kanha;
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        radha primeChecker = new radha();
+        kanha factorialCalculator = new kanha();
+        System.out.println("Enter the number:");
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+
+        if (primeChecker.isPrime(num)) {
+            System.out.println(num + " is a prime number.");
+        } else {
+            System.out.println(num + " is not a prime number.");
+        }
+
+        int factorial = factorialCalculator.calculateFactorial(num);
+        System.out.println("Factorial of " + num + " is: " + factorial);
+    }
+}
+
+
+package factorial;
+
+public class kanha {
+    public int calculateFactorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        int factorial = 1;
+        for (int i = 2; i <= n; i++) {
+            factorial *= i;
+        }
+        return factorial;
+    }
+}
+
+
+
+package prime;
+
+public class radha {
+    public boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
