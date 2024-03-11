@@ -1,0 +1,67 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class OddSqaure extends Frame implements ActionListener {
+
+    TextField tf;
+    Button b;
+    Label r, statusLabel;
+
+    public OddSqaure() {
+        Label l = new Label("Enter number");
+        r = new Label();
+        statusLabel = new Label();
+
+        tf = new TextField();
+        b = new Button("Result");
+
+        setLayout(null);
+
+        l.setBounds(30, 70, 150, 20);
+        r.setBounds(30, 170, 200, 20);
+        statusLabel.setBounds(30, 200, 200, 20);
+        tf.setBounds(30, 90, 190, 30);
+        b.setBounds(30, 130, 190, 30);
+
+        b.setBackground(Color.BLUE);
+        b.setForeground(Color.WHITE);
+
+        add(l);
+        add(r);
+        add(statusLabel);
+        add(tf);
+        add(b);
+
+        setSize(250, 250);
+        setVisible(true);
+
+        b.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b) {
+            try {
+                int num = Integer.parseInt(tf.getText());
+                r.setText("Square of " + num + " is " + (num * num));
+                if (num % 2 == 0) {
+                    statusLabel.setText(num + " is even.");
+                } else {
+                    statusLabel.setText(num + " is odd.");
+                }
+            } catch (NumberFormatException ex) {
+                r.setText("");
+                statusLabel.setText("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new OddSqaure();
+    }
+}
