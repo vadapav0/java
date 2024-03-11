@@ -1,0 +1,64 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class ArraySorter extends Frame implements ActionListener {
+    TextField inputField, outputField;
+    Button sortButton;
+
+    public ArraySorter() {
+        Label inputLabel = new Label("Enter numbers separated by commas:");
+        inputField = new TextField(20);
+        sortButton = new Button("Sort");
+        sortButton.addActionListener(this);
+        outputField = new TextField(20);
+        outputField.setEditable(false);
+
+        setLayout(new FlowLayout());
+        add(inputLabel);
+        add(inputField);
+        add(sortButton);
+        add(outputField);
+
+        setTitle("Array Sorter");
+        setSize(300, 150);
+        setVisible(true);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == sortButton) {
+            String input = inputField.getText();
+            String[] numbers = input.split(",");
+            int[] array = new int[numbers.length];
+            try {
+                for (int i = 0; i < numbers.length; i++)
+                    array[i] = Integer.parseInt(numbers[i].trim());
+                sortArray(array);
+                StringBuilder sortedNumbers = new StringBuilder();
+                for (int num : array)
+                    sortedNumbers.append(num).append(", ");
+                outputField.setText(sortedNumbers.toString());
+            } catch (NumberFormatException ex) {
+                outputField.setText("Invalid input. Please enter numbers separated by commas.");
+            }
+        }
+    }
+
+    private void sortArray(int[] array) {
+        for (int i = 0; i < array.length - 1; i++)
+            for (int j = 0; j < array.length - i - 1; j++)
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+    }
+
+    public static void main(String[] args) {
+        new ArraySorter();
+    }
+}
