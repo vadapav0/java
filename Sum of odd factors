@@ -1,0 +1,60 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class OddFactorsSum extends Frame implements ActionListener {
+    TextField inputField, outputField;
+    Button calculateButton;
+
+    public OddFactorsSum() {
+        Label inputLabel = new Label("Enter a number:");
+        inputField = new TextField(10);
+        calculateButton = new Button("Calculate");
+        calculateButton.addActionListener(this);
+        outputField = new TextField(20);
+        outputField.setEditable(false);
+
+        setLayout(new FlowLayout());
+
+        add(inputLabel);
+        add(inputField);
+        add(calculateButton);
+        add(outputField);
+
+        setTitle("Odd Factors Sum");
+        setSize(300, 150);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == calculateButton) {
+            String input = inputField.getText();
+            try {
+                int number = Integer.parseInt(input);
+                int sum = calculateOddFactorsSum(number);
+                outputField.setText("Sum of odd factors: " + sum);
+            } catch (NumberFormatException ex) {
+                outputField.setText("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    private int calculateOddFactorsSum(int num) {
+        int sum = 0;
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0 && i % 2 != 0) {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        new OddFactorsSum();
+    }
+}
