@@ -1,7 +1,8 @@
-//. Write a Java AWT program to check a number is palindrome or not
 import java.awt.*;
 import java.awt.event.*;
-class PalindromeChecker extends Frame implements ActionListener {
+
+public class PalindromeChecker extends Frame implements ActionListener {
+
     TextField tf;
     Button b;
     Label resultLabel;
@@ -41,33 +42,24 @@ class PalindromeChecker extends Frame implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == b) {
-            try {
-                int num = Integer.parseInt(tf.getText());
-                if (isPalindrome(num)) {
-                    resultLabel.setText(num + " is a palindrome number.");
-                } else {
-                    resultLabel.setText(num + " is not a palindrome number.");
-                }
-            } catch (NumberFormatException ex) {
-                resultLabel.setText("Invalid input. Please enter a valid number.");
-            }
+        int n = Integer.parseInt(tf.getText());
+        int rev = 0, rem;
+        int temp = n;
+
+        while (temp > 0) {
+            rem = temp % 10;
+            rev = rev * 10 + rem;
+            temp /= 10;
+        }
+
+        if (n == rev) {
+            resultLabel.setText(n + " is a palindrome");
+        } else {
+            resultLabel.setText(n + " is not a palindrome");
         }
     }
 
-    private boolean isPalindrome(int num) {
-        int reversed = 0;
-        int originalNum = num;
-        while (num != 0) {
-            int digit = num % 10;
-            reversed = reversed * 10 + digit;
-            num /= 10;
-        }
-        return originalNum == reversed;
-    }
-
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         new PalindromeChecker();
     }
 }
-
