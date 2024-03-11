@@ -1,0 +1,25 @@
+class myException extends Exception {
+    myException(String s) {
+        super(s);
+    }
+}
+
+class Student {
+
+    void check(int roll, String name, int age, String course) {
+        try {
+            if (age < 15 || age > 21) {
+                System.out.println("Valid");
+            } else {
+                throw new myException("Age not within the range");
+            }
+        } catch (myException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void main(String args[]) {
+        Student s = new Student();
+        s.check(14, "Tauseef", 18, "BScIT");
+    }
+}
