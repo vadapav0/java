@@ -1,0 +1,90 @@
+//33
+import java.awt.*;
+import java.awt.event.*;
+
+public class ArithmeticDemo extends Frame implements ItemListener {
+    TextField tf, tf1, rf;
+    Choice c;
+    public ArithmeticDemo() {
+        setLayout(new BorderLayout());
+
+        tf = new TextField();
+        tf1 = new TextField();
+        rf = new TextField();
+
+        c = new Choice();
+        c.add("+");
+        c.add("-");
+        c.add("*");
+        c.add("/");
+        c.add("%");
+
+        Panel inputPanel = new Panel(new GridLayout(3, 2));
+        inputPanel.add(new Label("Number 1:"));
+        inputPanel.add(tf);
+        inputPanel.add(new Label("Number 2:"));
+        inputPanel.add(tf1);
+        inputPanel.add(new Label("Operation:"));
+        inputPanel.add(c);
+
+        Panel resultPanel = new Panel();
+        resultPanel.add(new Label("Result:"));
+        resultPanel.add(rf);
+
+        add(inputPanel, BorderLayout.NORTH);
+        add(resultPanel, BorderLayout.CENTER);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+
+        c.addItemListener(this);
+
+        setTitle("Arithmetic Calculator");
+        setSize(300, 200);
+        setVisible(true);
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        performOperation();
+    }
+
+    private void performOperation() {
+        try {
+            int num1 = Integer.parseInt(tf.getText());
+            int num2 = Integer.parseInt(tf1.getText());
+            String selectedOperation = c.getSelectedItem();
+            double result;
+
+            switch (selectedOperation) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = (double) num1 / num2;
+                    break;
+                case "%":
+                    result = num1 % num2;
+                    break;
+                default:
+                    return;
+            }
+
+            rf.setText(String.valueOf(result));
+        } catch (Exception ex) {
+            rf.setText("Invalid input");
+        }
+    }
+
+    public static void main(String[] args) {
+        new ArithmeticDemo();
+    }
+}
