@@ -1,0 +1,46 @@
+class Employee {
+    protected int empno;
+    protected String empname;
+    protected String job;
+
+    public Employee(int empno, String empname, String job) {
+        this.empno = empno;
+        this.empname = empname;
+        this.job = job;
+    }
+    public void showInfo() {
+        System.out.println("Employee Number: " + empno);
+        System.out.println("Employee Name: " + empname);
+        System.out.println("Job: " + job);
+    }
+}
+
+class Salary extends Employee {
+    private float basic;
+    private double newsal;
+
+    public Salary(int empno, String empname, String job, float basic) {
+        super(empno, empname, job);
+        this.basic = basic;
+    }
+
+    public void calculate(double perc) {
+        newsal = basic + (basic * perc / 100);
+    }
+    public void dispdata() {
+        System.out.println("Basic Salary: " + basic);
+        System.out.println("New Salary: " + newsal);
+    }
+}
+
+public class EmployeeC {
+    public static void main(String[] args) {
+        Salary emp1 = new Salary(101, "John Doe", "Manager", 50000);
+        System.out.println("Employee Details:");
+        emp1.showInfo();
+
+        emp1.calculate(10);
+        System.out.println("\nSalary Details:");
+        emp1.dispdata();
+    }
+}
