@@ -1,0 +1,56 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class GradeCalculator extends Frame implements ActionListener {
+
+    TextField marksField;
+    Button calculateButton;
+    Label l;
+
+    public GradeCalculator() {
+
+        l = new Label ("Enter the Marks");
+        marksField = new TextField(20);
+        calculateButton = new Button("Calculate Grade");
+
+        add(l);
+        add(marksField);
+        add(calculateButton);
+
+        calculateButton.addActionListener(this);
+
+        setLayout(new FlowLayout());
+        setSize(300, 300);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        double marks = Double.parseDouble(marksField.getText());
+        String grade;
+
+        if (marks >= 90) {
+            grade = "A+";
+        } else if (marks >= 80) {
+            grade = "A";
+        } else if (marks >= 70) {
+            grade = "B+";
+        } else if (marks >= 60) {
+            grade = "B";
+        } else if (marks >= 50) {
+            grade = "C+";
+        } else {
+            grade = "F";
+        }
+        marksField.setText("Grade: " + grade);
+    }
+
+    public static void main(String[] args) {
+        new GradeCalculator();
+        }
+}
