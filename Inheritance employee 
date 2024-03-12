@@ -1,46 +1,54 @@
+import java.util.Scanner;
+
 class Employee {
-    protected int empno;
-    protected String empname;
-    protected String job;
+    public String name;
+    public double salary;
 
-    public Employee(int empno, String empname, String job) {
-        this.empno = empno;
-        this.empname = empname;
-        this.job = job;
-    }
-    public void showInfo() {
-        System.out.println("Employee Number: " + empno);
-        System.out.println("Employee Name: " + empname);
-        System.out.println("Job: " + job);
+    Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
     }
 }
 
-class Salary extends Employee {
-    private float basic;
-    private double newsal;
+class Manager extends Employee {
+    public String department;
 
-    public Salary(int empno, String empname, String job, float basic) {
-        super(empno, empname, job);
-        this.basic = basic;
-    }
-
-    public void calculate(double perc) {
-        newsal = basic + (basic * perc / 100);
-    }
-    public void dispdata() {
-        System.out.println("Basic Salary: " + basic);
-        System.out.println("New Salary: " + newsal);
+    Manager(String name, double salary, String department) {
+        super(name, salary);
+        this.department = department;
     }
 }
 
-public class EmployeeC {
+class Executive extends Manager {
+    public String location;
+
+    Executive(String name, double salary, String department, String location) {
+        super(name, salary, department);
+        this.location = location;
+    }
+
+    void display() {
+        System.out.println("Name of the Employee: " + name);
+        System.out.println("Salary of the Employee: " + salary);
+        System.out.println("Department of the Employee: " + department);
+        System.out.println("Location: " + location);
+    }
+
     public static void main(String[] args) {
-        Salary emp1 = new Salary(101, "John Doe", "Manager", 50000);
-        System.out.println("Employee Details:");
-        emp1.showInfo();
+        Scanner sc = new Scanner(System.in);
 
-        emp1.calculate(10);
-        System.out.println("\nSalary Details:");
-        emp1.dispdata();
+        System.out.print("Enter Name: ");
+        String name = sc.next();
+        System.out.print("Enter Salary: ");
+        double salary = sc.nextDouble();
+        System.out.print("Enter Department: ");
+        String department = sc.next();
+        System.out.print("Enter Location: ");
+        String location = sc.next();
+
+        Executive e = new Executive(name, salary, department, location);
+        e.display();
+
+        sc.close();
     }
 }
