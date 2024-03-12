@@ -1,0 +1,61 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class StationaryPrice extends Frame implements ItemListener {
+    private Label priceLabel;
+    private Choice c;
+
+    public StationaryPrice() {
+        setTitle("Stationary Price Calculator");
+        setSize(300, 150);
+        setLayout(new FlowLayout());
+        setResizable(false);
+
+        c = new Choice();
+        c.add("Select Stationary Item");
+        c.add("Ruler");
+        c.add("Pencil");
+        c.add("Pen");
+        c.add("Eraser");
+        c.add("Note Book");
+        c.addItemListener(this);
+        add(c);
+        priceLabel = new Label("Price: ");
+        add(priceLabel);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent) {
+                dispose();
+            }
+        });
+
+        setVisible(true);
+    }
+
+    public void itemStateChanged(ItemEvent event) {
+        String selectedItem = c.getSelectedItem();
+        int price = getPrice(selectedItem);
+        priceLabel.setText("Price: " + price);
+    }
+
+    private int getPrice(String item) {
+        switch (item) {
+            case "Ruler":
+                return 10;
+            case "Pencil":
+                return 12;
+            case "Pen":
+                return 20;
+            case "Eraser":
+                return 5;
+            case "Note Book":
+                return 32;
+            default:
+                return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        new StationaryPrice();
+    }
+}
